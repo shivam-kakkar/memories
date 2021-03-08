@@ -31,6 +31,10 @@ export default makeStyles(theme => ({
   userName: {
     display: "flex",
     alignItems: "center",
+    marginLeft: "10px",
+  },
+  titleBar: {
+    display: "flex",
   },
   brandContainer: {
     display: "flex",
@@ -39,5 +43,34 @@ export default makeStyles(theme => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+  },
+  [theme.breakpoints.down("sm")]: {
+    mainContainer: {
+      flexDirection: "column-reverse",
+    },
+  },
+  [theme.breakpoints.down("sm")]: {
+    appBar: {
+      borderRadius: 15,
+      margin: "30px 0",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      alignItems: "center",
+      padding: "10px 50px",
+    },
+    toolbar: {
+      display: "flex",
+      justifyContent: "flex-end",
+      width: "100%",
+    },
+    profile: {
+      display: "flex",
+      justifyContent: "space-between",
+      width: "100%",
+    },
+    userName: {
+      display: "none",
+    },
   },
 }));
