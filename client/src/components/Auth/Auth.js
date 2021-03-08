@@ -9,8 +9,12 @@ import Icon from "./icon";
 import { AUTH } from "../../constants/actionTypes";
 import useStyles from "./styles";
 import Input from "./Input";
+import { signin, signup } from "../../actions/auth";
+
+const initialState = { firstName: "", lastName: "", email: "", password: "", confirmPassword: "" };
 
 const Auth = () => {
+  const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -25,6 +29,12 @@ const Auth = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
   };
 
   const googleSuccess = async res => {
@@ -42,7 +52,7 @@ const Auth = () => {
   const googleError = () => alert("Google Sign In was unsuccessful. Try again later");
 
   const handleChange = e => {
-    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
