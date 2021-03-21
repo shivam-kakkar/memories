@@ -13,6 +13,7 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
+  console.log(post.message.length);
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -61,35 +62,39 @@ const Post = ({ post, setCurrentId }) => {
           </Button>
         </div>
       )}
-
-      <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary" component="h2">
-          {post.tags.map(tag => `#${tag} `)}
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <Typography noWrap className={classes.title} gutterBottom variant="h5" component="h2">
+          {post.title}
         </Typography>
-      </div>
-      <Typography className={classes.title} gutterBottom variant="h5" component="h2">
-        {post.title}
-      </Typography>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {post.message}
-        </Typography>
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <Button
-          size="small"
-          color="primary"
-          disabled={!user?.result}
-          onClick={() => dispatch(likePost(post._id))}
-        >
-          <Likes />
-        </Button>
-        {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-          <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-            <DeleteIcon fontSize="small" /> Delete
+        <CardContent>
+          <Typography className={classes.message} variant="body2" component="p">
+            {post.message.substring(0, 84)}{" "}
+            {post.message.length > 84 && (
+              <span style={{ color: "grey", cursor: "pointer" }}>...more</span>
+            )}
+          </Typography>
+        </CardContent>
+        <div className={classes.details}>
+          <Typography variant="body2" color="textSecondary" component="h2">
+            {post.tags.map(tag => `#${tag} `)}
+          </Typography>
+        </div>
+        <CardActions className={classes.cardActions}>
+          <Button
+            size="small"
+            color="primary"
+            disabled={!user?.result}
+            onClick={() => dispatch(likePost(post._id))}
+          >
+            <Likes />
           </Button>
-        )}
-      </CardActions>
+          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+            <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+              <DeleteIcon fontSize="small" /> Delete
+            </Button>
+          )}
+        </CardActions>
+      </div>
     </Card>
   );
 };

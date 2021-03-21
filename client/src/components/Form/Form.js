@@ -9,7 +9,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    tags: "",
+    tags: [],
     selectedFile: "",
   });
   const post = useSelector(state =>
@@ -47,7 +47,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(0);
-    setPostData({ title: "", message: "", tags: "", selectedFile: "" });
+    setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   };
   return (
     <Paper className={classes.paper}>
