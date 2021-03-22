@@ -9,8 +9,8 @@ import PostScreen from "./components/PostScreen/PostScreen";
 
 const App = () => (
   <BrowserRouter>
-    <Container maxWidth="lg">
-      <Navbar />
+    <Navbar />
+    <Container maxWidth="lg" style={{ marginTop: "20px" }}>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/auth" exact component={Auth} />

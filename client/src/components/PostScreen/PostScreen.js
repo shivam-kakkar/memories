@@ -107,22 +107,20 @@ const PostScreen = ({ history, match }) => {
             direction="column"
             xs={12}
             sm={5}
-            style={{ background: "white", justifyContent: "space-between" }}
+            className={classes.contentContainer}
           >
             <div>
               <div className={classes.profile}>
                 <div style={{ display: "flex" }}>
-                  <Avatar style={{ backgroundColor: "purple", height: "35px", width: "35px" }}>
-                    {post.name.charAt(0)}
-                  </Avatar>
+                  <Avatar className={classes.avatar}>{post.name.charAt(0)}</Avatar>
                   <Typography className={classes.userName} variant="h6">
                     {post.name}
                   </Typography>
                 </div>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
               </div>
-              <hr style={{ height: "1px", backgroundColor: "#ccc", border: "none" }} />
-              <div style={{ maxHeight: "354px", overflowY: "scroll" }}>
+              <hr className={classes.horizontal} />
+              <div className={classes.middleContainer}>
                 <Typography className={classes.title} gutterBottom variant="h5" component="h2">
                   {post.title}
                 </Typography>
@@ -137,12 +135,11 @@ const PostScreen = ({ history, match }) => {
                   </Typography>
                 </div>
                 <div>
-                  <hr style={{ height: "1px", backgroundColor: "#ccc", border: "none" }} />
+                  <hr className={classes.horizontal} />
                   <Typography style={{ padding: "0 5px" }} variant="h5">
                     comments({post.comments.length})
                   </Typography>
                 </div>
-                {/* <div> */}
                 {post.comments.map(comment => (
                   <div
                     style={{
@@ -157,11 +154,10 @@ const PostScreen = ({ history, match }) => {
                     </span>
                   </div>
                 ))}
-                {/* </div> */}
               </div>
             </div>
             <div>
-              <hr style={{ height: "1px", backgroundColor: "#ccc", border: "none" }} />
+              <hr className={classes.horizontal} />
               <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
                   <Likes />
@@ -177,7 +173,7 @@ const PostScreen = ({ history, match }) => {
                 )}
               </CardActions>
               {user?.result ? (
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className={classes.commentDiv}>
                   <TextField
                     id="comment"
                     variant="outlined"
@@ -191,7 +187,7 @@ const PostScreen = ({ history, match }) => {
                 </div>
               ) : (
                 <div>
-                  <hr style={{ height: "1px", backgroundColor: "#ccc", border: "none" }} />
+                  <hr className={classes.horizontal} />
                   <div style={{ textAlign: "center", paddingBottom: "5px" }}>
                     <Link to="/auth" style={{ textDecoration: "none" }}>
                       Login
