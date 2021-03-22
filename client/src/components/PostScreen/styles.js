@@ -6,10 +6,21 @@ export default makeStyles({
     paddingTop: "96.25%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     backgroundBlendMode: "darken",
-    cursor: "pointer",
   },
   border: {
     border: "solid",
+  },
+  profile: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: "5px",
+    padding: "0 10px",
+  },
+  userName: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "10px",
   },
   fullHeightCard: {
     height: "100%",
@@ -46,6 +57,7 @@ export default makeStyles({
     padding: "5px 16px 0 16px",
     fontWeight: "bold",
     textTransform: "uppercase",
+    wordBreak: "break-word",
   },
   message: {
     wordBreak: "break-word",

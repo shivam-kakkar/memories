@@ -4,7 +4,9 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
+import CommentOutlined from "@material-ui/icons/CommentOutlined";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
 import useStyles from "./styles";
@@ -13,7 +15,6 @@ const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
-  console.log(post.message.length);
 
   const Likes = () => {
     if (post.likes.length > 0) {
@@ -43,14 +44,16 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={
-          post.selectedFile ||
-          "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
-        }
-        title={post.title}
-      />
+      <Link to={`post/${post._id}`}>
+        <CardMedia
+          className={classes.media}
+          image={
+            post.selectedFile ||
+            "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+          }
+          title={post.title}
+        />
+      </Link>
       <div className={classes.overlay}>
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
@@ -70,7 +73,9 @@ const Post = ({ post, setCurrentId }) => {
           <Typography className={classes.message} variant="body2" component="p">
             {post.message.substring(0, 84)}{" "}
             {post.message.length > 84 && (
-              <span style={{ color: "grey", cursor: "pointer" }}>...more</span>
+              <Link to={`post/${post._id}`} style={{ textDecoration: "none" }}>
+                <span style={{ color: "grey", cursor: "pointer" }}>...more</span>
+              </Link>
             )}
           </Typography>
         </CardContent>
@@ -88,6 +93,11 @@ const Post = ({ post, setCurrentId }) => {
           >
             <Likes />
           </Button>
+          <Link to={`post/${post._id}`}>
+            <Button color="primary">
+              <CommentOutlined fontSize="small" />
+            </Button>
+          </Link>
           {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
             <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
               <DeleteIcon fontSize="small" /> Delete
