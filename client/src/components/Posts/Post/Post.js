@@ -9,7 +9,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
-import { setCurrentId } from "../../../actions/currentId";
+import { setCurrentId } from "../../../actions/currentSelected";
 import useStyles from "./styles";
 
 const Post = ({ post }) => {

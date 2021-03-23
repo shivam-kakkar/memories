@@ -2,6 +2,6 @@ import { combineReducers } from "redux";
 
 import posts from "./posts";
 import auth from "./auth";
-import currentId from "./currentId";
+import currentSelected from "./currentSelected";
 
-export const reducers = combineReducers({ posts, auth, currentId });
+export const reducers = combineReducers({ posts, auth, currentSelected });

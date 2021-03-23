@@ -7,7 +7,6 @@ import {
   Avatar,
   Typography,
   CircularProgress,
-  Card,
   CardActions,
   CardContent,
   Button,
@@ -20,7 +19,7 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import CommentOutlined from "@material-ui/icons/CommentOutlined";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import moment from "moment";
-import { getPost } from "../../actions/posts";
+import { setCurrentId, getPost } from "../../actions/currentSelected";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost, likePost, commentPost } from "../../actions/posts";
 import useStyles from "./styles";
@@ -29,10 +28,10 @@ const PostScreen = ({ history, match }) => {
   const [commentBody, setCommentBody] = useState("");
   const dispatch = useDispatch();
   const classes = useStyles();
-  const post = useSelector(state => state.posts);
-  // console.log(post);
+  const post = useSelector(state => state.currentSelected.currentPost);
   const id = match.params.id;
   useEffect(() => {
+    dispatch(setCurrentId(id));
     dispatch(getPost(id));
   }, [dispatch, id]);
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -85,7 +84,7 @@ const PostScreen = ({ history, match }) => {
       history.push("/auth");
     }
   };
-  return !post.title ? (
+  return !post ? (
     <CircularProgress />
   ) : (
     <Grow in>

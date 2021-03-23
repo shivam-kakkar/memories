@@ -6,7 +6,7 @@ export default makeStyles(theme => ({
   },
   [theme.breakpoints.down("sm")]: {
     container: {
-      marginTop: "0",
+      marginTop: "15px",
       padding: 0,
     },
   },

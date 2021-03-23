@@ -61,7 +61,7 @@ const Navbar = props => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [user?.token, location]);
 
   return (
     <>

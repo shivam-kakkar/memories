@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import useStyles from "./styles";
 import { createPost, updatePost } from "../../actions/posts";
-import { clearCurrentId } from "../../actions/currentId";
+import { clearCurrentId } from "../../actions/currentSelected";
 
 const Form = () => {
   const [postData, setPostData] = useState({
@@ -13,7 +13,7 @@ const Form = () => {
     tags: [],
     selectedFile: "",
   });
-  const currentId = useSelector(state => state.currentId.currentId);
+  const currentId = useSelector(state => state.currentSelected.currentId);
   const post = useSelector(state =>
     currentId ? state.posts.find(message => message._id === currentId) : null
   );
