@@ -89,7 +89,7 @@ const PostScreen = ({ history, match }) => {
     <CircularProgress />
   ) : (
     <Grow in>
-      <Container maxWidth="md">
+      <Container maxWidth="md" style={{ padding: 0 }}>
         <Grid container>
           <Grid item xs={12} sm={7}>
             <CardMedia
