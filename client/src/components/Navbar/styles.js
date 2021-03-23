@@ -48,22 +48,20 @@ export default makeStyles(theme => ({
   },
   [theme.breakpoints.down("xs")]: {
     appBar: {
-      display: "flex",
-      // flexDirection: "column",
-      // justifyContent: "space-between",
       alignItems: "center",
     },
+    heading: {
+      marginLeft: "5px",
+    },
     toolbar: {
-      display: "flex",
-      justifyContent: "flex-end",
       width: "100%",
     },
     profile: {
-      display: "flex",
-      justifyContent: "space-between",
-      width: "100%",
+      // display: "flex",
+      // justifyContent: "space-between",
+      width: "auto",
     },
-    userName: {
+    titleBar: {
       display: "none",
     },
     image: {

@@ -41,6 +41,9 @@ const Navbar = props => {
   const headingProps = {
     variant: isSmallScreen ? "h5" : "h2",
   };
+  const buttonProps = {
+    size: isSmallScreen ? "small" : "medium",
+  };
 
   const logout = () => {
     dispatch({ type: LOGOUT });
@@ -97,6 +100,7 @@ const Navbar = props => {
                 <Button
                   variant="contained"
                   className={classes.logout}
+                  {...buttonProps}
                   color="secondary"
                   onClick={logout}
                 >

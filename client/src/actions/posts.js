@@ -53,8 +53,6 @@ export const likePost = id => async dispatch => {
 };
 
 export const commentPost = (id, comment) => async dispatch => {
-  console.log("id: ", id);
-  console.log(comment);
   try {
     const { data } = await api.commentPost(id, comment);
 

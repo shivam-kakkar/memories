@@ -67,15 +67,17 @@ const PostScreen = ({ history, match }) => {
     history.push("/");
   };
 
-  const handleComment = () => {
-    dispatch(commentPost(post._id, { body: commentBody }));
+  const handleComment = async () => {
+    await dispatch(commentPost(post._id, { body: commentBody }));
     setCommentBody("");
-    dispatch(getPost(id));
+    await dispatch(getPost(id));
+    var middleContainer = document.getElementById("middle");
+    middleContainer.scrollTop = middleContainer.scrollHeight;
   };
 
-  const handleLike = () => {
-    dispatch(likePost(post._id));
-    dispatch(getPost(id));
+  const handleLike = async () => {
+    await dispatch(likePost(post._id));
+    await dispatch(getPost(id));
   };
   const focus = () => {
     if (user?.result) {
@@ -119,7 +121,7 @@ const PostScreen = ({ history, match }) => {
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
               </div>
               <hr className={classes.horizontal} />
-              <div className={classes.middleContainer}>
+              <div id="middle" className={classes.middleContainer}>
                 <Typography className={classes.title} gutterBottom variant="h5" component="h2">
                   {post.title}
                 </Typography>
@@ -141,16 +143,15 @@ const PostScreen = ({ history, match }) => {
                 </div>
                 {post.comments.map(comment => (
                   <div
+                    key={comment._id}
                     style={{
                       display: "flex",
-                      alignItems: "center",
+                      alignItems: "flex-start",
                     }}
                   >
                     <AccountCircle />
                     <span style={{ marginRight: "5px" }}>Anonymous</span>
-                    <span style={{ color: "grey" }} key={comment._id}>
-                      {comment.body}
-                    </span>
+                    <span style={{ color: "grey", wordBreak: "break-word" }}>{comment.body}</span>
                   </div>
                 ))}
               </div>

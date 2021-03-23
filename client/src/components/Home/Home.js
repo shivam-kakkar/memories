@@ -11,11 +11,10 @@ import useStyles from "./styles";
 const Home = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const currentId = useSelector(state => state.currentSelected.currentId);
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch, currentId]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(clearCurrentId());

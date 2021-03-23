@@ -23,6 +23,7 @@ const Form = () => {
 
   useEffect(() => {
     if (post) setPostData(post);
+    if (!post) setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   }, [post]);
 
   const handleSubmit = async e => {
