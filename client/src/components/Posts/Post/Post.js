@@ -9,9 +9,10 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
+import { setCurrentId } from "../../../actions/currentId";
 import useStyles from "./styles";
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -60,7 +61,11 @@ const Post = ({ post, setCurrentId }) => {
       </div>
       {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
         <div className={classes.overlay2}>
-          <Button style={{ color: "white" }} size="small" onClick={() => setCurrentId(post._id)}>
+          <Button
+            style={{ color: "white" }}
+            size="small"
+            onClick={() => dispatch(setCurrentId(post._id))}
+          >
             <MoreHorizIcon fontSize="default" />
           </Button>
         </div>
