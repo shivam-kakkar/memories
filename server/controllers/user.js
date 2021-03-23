@@ -59,3 +59,12 @@ export const signup = async (req, res) => {
     console.log(error);
   }
 };
+
+export const users = async (req, res) => {
+  try {
+    const userlist = await User.find().select("name email");
+    res.status(200).json(userlist);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

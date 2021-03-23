@@ -93,8 +93,8 @@ export const likePost = async (req, res) => {
 
 export const commentPost = async (req, res) => {
   const { id } = req.params;
-  const { body } = req.body;
-  const comment = { body, creator: req.userId };
+  const { body, name } = req.body;
+  const comment = { body, creator: req.userId, name };
 
   if (!req.userId) {
     return res.json({ message: "Unauthenticated" });

@@ -23,6 +23,12 @@ export default makeStyles(theme => ({
     height: "35px",
     width: "35px",
   },
+  avatarComment: {
+    backgroundColor: "black",
+    height: "25px",
+    width: "25px",
+    marginRight: "5px",
+  },
   userName: {
     display: "flex",
     alignItems: "center",
@@ -66,32 +72,9 @@ export default makeStyles(theme => ({
       maxHeight: "100%",
     },
   },
-  // border: {
-  //   border: "solid",
-  // },
-  // fullHeightCard: {
-  //   height: "100%",
-  // },
-  // card: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   justifyContent: "space-between",
-  //   borderRadius: "15px",
-  //   position: "relative",
-  // },
-  // overlay: {
-  //   position: "absolute",
-  //   top: "20px",
-  //   left: "20px",
-  //   color: "white",
-  // },
-  // overlay2: {
-  //   position: "absolute",
-  //   top: "20px",
-  //   right: "20px",
-  //   color: "white",
-  // },
-  // grid: {
-  //   display: "flex",
+  // [theme.breakpoints.down("sm")]: {
+  //   middleContainer: {
+  //     maxHeight: "130px",
+  //   },
   // },
 }));

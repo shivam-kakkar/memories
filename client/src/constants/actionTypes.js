@@ -12,3 +12,5 @@ export const CLEAR_CURRENT_ID = "CLEAR_CURRENT_ID";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
+
+export const FETCH_USERS = "FETCH_USERS";

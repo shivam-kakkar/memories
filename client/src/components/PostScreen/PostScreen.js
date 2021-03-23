@@ -68,7 +68,8 @@ const PostScreen = ({ history, match }) => {
   };
 
   const handleComment = async () => {
-    await dispatch(commentPost(post._id, { body: commentBody }));
+    await dispatch(commentPost(post._id, { body: commentBody, name: user.result.name }));
+    console.log(user.result.name);
     setCommentBody("");
     await dispatch(getPost(id));
     var middleContainer = document.getElementById("middle");
@@ -141,19 +142,26 @@ const PostScreen = ({ history, match }) => {
                     comments({post.comments.length})
                   </Typography>
                 </div>
-                {post.comments.map(comment => (
-                  <div
-                    key={comment._id}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <AccountCircle />
-                    <span style={{ marginRight: "5px" }}>Anonymous</span>
-                    <span style={{ color: "grey", wordBreak: "break-word" }}>{comment.body}</span>
-                  </div>
-                ))}
+                <div style={{ padding: "5px" }}>
+                  {post.comments.map(comment => (
+                    <div
+                      key={comment._id}
+                      style={{
+                        display: "inline-block",
+                        // alignItems: "flex-start",
+                        padding: "2px 0",
+                      }}
+                    >
+                      {/* <Avatar className={classes.avatarComment} alt={comment.name}>
+                        {comment.name.charAt(0)}
+                      </Avatar> */}
+                      <span style={{ color: "#484848", marginRight: "5px", fontWeight: "bold" }}>
+                        {comment.name}
+                      </span>
+                      <span style={{ wordBreak: "break-word" }}>{comment.body}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div>

@@ -34,6 +34,7 @@ const Form = () => {
       clear();
     } else {
       await dispatch(createPost({ ...postData, name: user?.result?.name }));
+      window.scrollTo(0, document.body.scrollHeight);
       clear();
     }
   };

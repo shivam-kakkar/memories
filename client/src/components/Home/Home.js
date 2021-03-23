@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCurrentId, clearPost } from "../../actions/currentSelected";
 
 import { getPosts } from "../../actions/posts";
+import { getUsers } from "../../actions/users";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import useStyles from "./styles";
@@ -14,6 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getUsers());
   }, [dispatch]);
 
   useEffect(() => {

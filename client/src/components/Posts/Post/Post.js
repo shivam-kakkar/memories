@@ -1,5 +1,16 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from "@material-ui/core/";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+} from "@material-ui/core/";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -43,6 +54,11 @@ const Post = ({ post }) => {
     );
   };
 
+  const handleEdit = () => {
+    dispatch(setCurrentId(post._id));
+    window.scrollTo(0, 0);
+  };
+
   return (
     <Card className={classes.card}>
       <Link to={`post/${post._id}`}>
@@ -61,13 +77,11 @@ const Post = ({ post }) => {
       </div>
       {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
         <div className={classes.overlay2}>
-          <Button
-            style={{ color: "white" }}
-            size="small"
-            onClick={() => dispatch(setCurrentId(post._id))}
-          >
-            <MoreHorizIcon fontSize="default" />
-          </Button>
+          <Tooltip title="Edit Post">
+            <Button style={{ color: "white" }} size="small" onClick={handleEdit}>
+              <MoreHorizIcon fontSize="default" />
+            </Button>
+          </Tooltip>
         </div>
       )}
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
