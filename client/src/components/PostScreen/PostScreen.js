@@ -17,7 +17,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Link } from "react-router-dom";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import CommentOutlined from "@material-ui/icons/CommentOutlined";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import moment from "moment";
 import { setCurrentId, getPost } from "../../actions/currentSelected";
 import { useDispatch, useSelector } from "react-redux";

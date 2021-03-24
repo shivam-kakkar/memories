@@ -29,13 +29,17 @@ const Form = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (currentId) {
-      await dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
-      clear();
+    if (postData.selectedFile !== "") {
+      if (currentId) {
+        await dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
+        clear();
+      } else {
+        await dispatch(createPost({ ...postData, name: user?.result?.name }));
+        window.scrollTo(0, document.body.scrollHeight);
+        clear();
+      }
     } else {
-      await dispatch(createPost({ ...postData, name: user?.result?.name }));
-      window.scrollTo(0, document.body.scrollHeight);
-      clear();
+      alert("Please Upload Image");
     }
   };
 
@@ -57,7 +61,6 @@ const Form = () => {
     <Paper className={classes.paper}>
       <form
         autoComplete="off"
-        noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >

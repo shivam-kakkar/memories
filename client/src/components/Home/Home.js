@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Grow, Grid } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearCurrentId, clearPost } from "../../actions/currentSelected";
 
 import { getPosts } from "../../actions/posts";
