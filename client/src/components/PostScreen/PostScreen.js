@@ -37,7 +37,7 @@ const PostScreen = ({ history, match }) => {
 
   const Likes = () => {
     if (post.likes.length > 0) {
-      return post.likes.find(like => like === (user?.result?.googleId || user?.result?._id)) ? (
+      return post.likes.find(like => like === user?.result?.email) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
@@ -173,8 +173,7 @@ const PostScreen = ({ history, match }) => {
                 <Button color="primary" onClick={focus}>
                   <CommentOutlined fontSize="small" />
                 </Button>
-                {(user?.result?.googleId === post?.creator ||
-                  user?.result?._id === post?.creator) && (
+                {user?.result?.email === post?.creator && (
                   <Button size="small" color="primary" onClick={handleDelete}>
                     <DeleteIcon fontSize="small" /> Delete
                   </Button>

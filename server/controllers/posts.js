@@ -29,7 +29,7 @@ export const createPost = async (req, res) => {
 
   const newPost = new Post({
     ...post,
-    creator: req.userId,
+    creator: req.email,
     createdAt: new Date().toISOString(),
   });
 
@@ -68,7 +68,7 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   const { id } = req.params;
 
-  if (!req.userId) {
+  if (!req.email) {
     return res.json({ message: "Unauthenticated" });
   }
 
@@ -76,13 +76,13 @@ export const likePost = async (req, res) => {
 
   const post = await Post.findById(id);
 
-  const index = post.likes.findIndex(id => id === String(req.userId));
+  const index = post.likes.findIndex(email => email === String(req.email));
 
   if (index === -1) {
     //index = 1 only when this id is not in database
-    post.likes.push(req.userId);
+    post.likes.push(req.email);
   } else {
-    post.likes = post.likes.filter(id => id !== String(req.userId));
+    post.likes = post.likes.filter(email => email !== String(req.email));
   }
 
   const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
@@ -93,9 +93,9 @@ export const likePost = async (req, res) => {
 export const commentPost = async (req, res) => {
   const { id } = req.params;
   const { body, name } = req.body;
-  const comment = { body, creator: req.userId, name };
+  const comment = { body, creator: req.email, name };
 
-  if (!req.userId) {
+  if (!req.email) {
     return res.json({ message: "Unauthenticated" });
   }
 

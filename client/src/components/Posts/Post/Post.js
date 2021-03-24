@@ -27,7 +27,7 @@ const Post = ({ post }) => {
 
   const Likes = () => {
     if (post.likes.length > 0) {
-      return post.likes.find(like => like === (user?.result?.googleId || user?.result?._id)) ? (
+      return post.likes.find(like => like === user?.result?.email) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
@@ -73,7 +73,7 @@ const Post = ({ post }) => {
         <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
       </div>
-      {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+      {user?.result?.email === post?.creator && (
         <div className={classes.overlay2}>
           <Tooltip title="Edit Post">
             <Button style={{ color: "white" }} size="small" onClick={handleEdit}>
@@ -115,7 +115,7 @@ const Post = ({ post }) => {
               <CommentOutlined fontSize="small" />
             </Button>
           </Link>
-          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+          {user?.result?.email === post?.creator && (
             <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
               <DeleteIcon fontSize="small" /> Delete
             </Button>
