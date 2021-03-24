@@ -34,9 +34,10 @@ const Post = ({ post }) => {
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
-          {post.likes.length > 2
+          {/* {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`} */}
+          {post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       ) : (
         <>
@@ -68,7 +69,7 @@ const Post = ({ post }) => {
             post.selectedFile ||
             "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
           }
-          title={post.title}
+          title="View Post"
         />
       </Link>
       <div className={classes.overlay}>

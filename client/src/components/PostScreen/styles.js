@@ -2,10 +2,11 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(theme => ({
   media: {
-    height: 0,
-    paddingTop: "96.25%",
+    height: 560,
+    // paddingTop: "96.25%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    backgroundBlendMode: "darken",
+    backgroundSize: "100% 100%",
+    // backgroundBlendMode: "darken",
   },
   contentContainer: {
     background: "white",
@@ -19,7 +20,7 @@ export default makeStyles(theme => ({
     padding: "0 10px",
   },
   avatar: {
-    backgroundColor: "purple",
+    backgroundColor: "black",
     height: "35px",
     width: "35px",
   },
@@ -41,7 +42,7 @@ export default makeStyles(theme => ({
   },
   middleContainer: {
     maxHeight: "354px",
-    overflowY: "scroll",
+    overflowY: "auto",
   },
   title: {
     padding: "5px 16px 0 16px",
@@ -70,6 +71,9 @@ export default makeStyles(theme => ({
   [theme.breakpoints.down("xs")]: {
     middleContainer: {
       maxHeight: "100%",
+    },
+    media: {
+      height: 400,
     },
   },
   // [theme.breakpoints.down("sm")]: {

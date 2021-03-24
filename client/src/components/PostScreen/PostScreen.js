@@ -42,9 +42,10 @@ const PostScreen = ({ history, match }) => {
         <>
           <ThumbUpAltIcon fontSize="small" />
           &nbsp;
-          {post.likes.length > 2
+          {/* {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+            : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`} */}
+          {post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       ) : (
         <>
@@ -147,18 +148,18 @@ const PostScreen = ({ history, match }) => {
                     <div
                       key={comment._id}
                       style={{
-                        display: "inline-block",
-                        // alignItems: "flex-start",
+                        display: "flex",
+                        alignItems: "flex-start",
                         padding: "2px 0",
                       }}
                     >
-                      {/* <Avatar className={classes.avatarComment} alt={comment.name}>
+                      <Avatar className={classes.avatarComment} alt={comment.name}>
                         {comment.name.charAt(0)}
-                      </Avatar> */}
-                      <span style={{ color: "#484848", marginRight: "5px", fontWeight: "bold" }}>
-                        {comment.name}
-                      </span>
-                      <span style={{ wordBreak: "break-word" }}>{comment.body}</span>
+                      </Avatar>
+                      <p style={{ margin: 0, padding: "3px 0 0 0" }}>
+                        <span style={{ color: "#484848", fontWeight: "bold" }}>{comment.name}</span>{" "}
+                        <span style={{ wordBreak: "break-word" }}>{comment.body}</span>
+                      </p>
                     </div>
                   ))}
                 </div>

@@ -22,4 +22,9 @@ export default makeStyles(theme => ({
   buttonSubmit: {
     marginBottom: 10,
   },
+  [theme.breakpoints.down("xs")]: {
+    paper: {
+      margin: "10px",
+    },
+  },
 }));
