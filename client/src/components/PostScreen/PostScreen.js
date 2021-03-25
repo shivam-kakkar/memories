@@ -69,7 +69,6 @@ const PostScreen = ({ history, match }) => {
 
   const handleComment = async () => {
     await dispatch(commentPost(post._id, { body: commentBody, name: user.result.name }));
-    console.log(user.result.name);
     setCommentBody("");
     await dispatch(getPost(id));
     var middleContainer = document.getElementById("middle");

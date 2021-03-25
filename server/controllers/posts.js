@@ -1,4 +1,3 @@
-import express from "express";
 import mongoose from "mongoose";
 
 import Post from "../models/post.js";
@@ -106,5 +105,5 @@ export const commentPost = async (req, res) => {
   post.comments.push(comment);
 
   const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
-  res.json(updatePost);
+  res.json(updatedPost);
 };

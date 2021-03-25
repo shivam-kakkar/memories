@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, Typography, Paper, Collapse, IconButton } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import useStyles from "./styles";
 import { createPost, updatePost } from "../../actions/posts";
 import { clearCurrentId } from "../../actions/currentSelected";
+import MuiAlert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
 
 const Form = () => {
   const [postData, setPostData] = useState({
@@ -13,6 +15,7 @@ const Form = () => {
     tags: [],
     selectedFile: "",
   });
+  const [alertOpen, setAlertOpen] = useState(false);
   const currentId = useSelector(state => state.currentSelected.currentId);
   const post = useSelector(state =>
     currentId ? state.posts.find(message => message._id === currentId) : null
@@ -38,8 +41,10 @@ const Form = () => {
         window.scrollTo(0, document.body.scrollHeight);
         clear();
       }
+      document.getElementById("form").reset();
+      setAlertOpen(false);
     } else {
-      alert("Please Upload Image");
+      setAlertOpen(true);
     }
   };
 
@@ -57,12 +62,18 @@ const Form = () => {
     dispatch(clearCurrentId());
     setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   };
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
   return (
     <Paper className={classes.paper}>
       <form
         autoComplete="off"
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
+        id="form"
       >
         <Typography variant="h6">{currentId ? "Edit memory" : "Create a Memory"}</Typography>
         <TextField
@@ -72,6 +83,7 @@ const Form = () => {
           fullWidth
           value={postData.title}
           onChange={e => setPostData({ ...postData, title: e.target.value })}
+          required
         />
         <TextField
           name="message"
@@ -82,6 +94,7 @@ const Form = () => {
           rows={4}
           value={postData.message}
           onChange={e => setPostData({ ...postData, message: e.target.value })}
+          required
         />
         <TextField
           name="tags"
@@ -96,8 +109,28 @@ const Form = () => {
             type="file"
             multiple={false}
             onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
-          />
+          />{" "}
+          <Collapse in={alertOpen}>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setAlertOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              severity="error"
+            >
+              Please Upload Image
+            </Alert>
+          </Collapse>
         </div>
+
         <Button
           className={classes.buttonSubmit}
           variant="contained"
