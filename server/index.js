@@ -10,6 +10,15 @@ import userRoutes from "./routes/user.js";
 const app = express();
 dotenv.config();
 
+app.enable("trust proxy");
+app.use((req, res, next) => {
+  if (req.protocol == "https") {
+    next();
+  } else {
+    res.redirect(`https://${req.hostname}`);
+  }
+});
+
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
@@ -19,6 +28,10 @@ app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Memories API");
+});
+
+app.use((req, res) => {
+  res.send("404,not found");
 });
 
 const PORT = process.env.PORT || 5000;
