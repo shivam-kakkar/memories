@@ -115,10 +115,12 @@ const Post = ({ post }) => {
               <CommentOutlined fontSize="small" />
             </Button>
           </Link>
-          {user?.result?.email === post?.creator && (
+          {user?.result?.email === post?.creator ? (
             <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
               <DeleteIcon fontSize="small" /> Delete
             </Button>
+          ) : (
+            <Button disabled style={{ cursor: "default" }}></Button>
           )}
         </CardActions>
       </div>

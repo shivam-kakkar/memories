@@ -172,10 +172,12 @@ const PostScreen = ({ history, match }) => {
                 <Button color="primary" onClick={focus}>
                   <CommentOutlined fontSize="small" />
                 </Button>
-                {user?.result?.email === post?.creator && (
+                {user?.result?.email === post?.creator ? (
                   <Button size="small" color="primary" onClick={handleDelete}>
                     <DeleteIcon fontSize="small" /> Delete
                   </Button>
+                ) : (
+                  <Button disabled style={{ cursor: "default" }}></Button>
                 )}
               </CardActions>
               {user?.result ? (
