@@ -18,6 +18,7 @@ import useStyles from "./styles";
 import { LOGOUT } from "../../constants/actionTypes";
 import { useTheme } from "@material-ui/core/styles";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import TelegramIcon from "@material-ui/icons/Telegram";
 import { OPEN_FORM } from "../../constants/actionTypes";
 
 function HideOnScroll(props) {
@@ -97,6 +98,11 @@ const Navbar = props => {
                     color="primary"
                     style={{ cursor: "pointer", fontSize: "40px" }}
                   />
+                </Tooltip>
+                <Tooltip title="Chat">
+                  <Link to="/chat">
+                    <TelegramIcon color="primary" style={{ cursor: "pointer", fontSize: "40px" }} />
+                  </Link>
                 </Tooltip>
                 <div className={classes.titleBar}>
                   <Avatar

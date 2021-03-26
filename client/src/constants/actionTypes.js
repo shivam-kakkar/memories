@@ -17,3 +17,6 @@ export const FETCH_USERS = "FETCH_USERS";
 
 export const OPEN_FORM = "OPEN_FORM";
 export const CLOSE_FORM = "CLOSE_FORM";
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const CLEAR_CURRENT_USER = "CLEAR_CURRENT_USER";

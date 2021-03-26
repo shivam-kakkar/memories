@@ -11,6 +11,7 @@ import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Auth from "./components/Auth/Auth";
 import PostScreen from "./components/PostScreen/PostScreen";
+import Chat from "./components/Chat/Chat";
 import useStyles from "./styles";
 
 const App = () => {
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/auth" exact component={Auth} />
           <Route path="/post/:id" exact component={PostScreen} />
+          <Route path="/chat" exact component={Chat} />
         </Switch>
       </Container>
     </BrowserRouter>
