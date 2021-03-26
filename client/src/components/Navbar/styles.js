@@ -13,7 +13,7 @@ export default makeStyles(theme => ({
   },
   image: {
     marginLeft: "15px",
-    width: "60px",
+    width: "35px",
   },
   toolbar: {
     display: "flex",
@@ -22,7 +22,7 @@ export default makeStyles(theme => ({
   },
   profile: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
     width: "400px",
   },
@@ -33,6 +33,11 @@ export default makeStyles(theme => ({
   },
   titleBar: {
     display: "flex",
+    cursor: "pointer",
+    padding: "10px",
+    "&:hover": {
+      border: "1px solid #D8DADF",
+    },
   },
   brandContainer: {
     display: "flex",
@@ -41,6 +46,8 @@ export default makeStyles(theme => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+    width: theme.spacing(4),
+    height: theme.spacing(4),
   },
   [theme.breakpoints.down("sm")]: {
     mainContainer: {

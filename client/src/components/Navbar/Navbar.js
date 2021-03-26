@@ -42,7 +42,7 @@ const Navbar = props => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
   const headingProps = {
-    variant: isSmallScreen ? "h5" : "h2",
+    variant: isSmallScreen ? "h5" : "h4",
   };
   const buttonProps = {
     size: isSmallScreen ? "small" : "medium",
@@ -107,7 +107,7 @@ const Navbar = props => {
                     {user.result.name.charAt(0)}
                   </Avatar>
                   <Typography className={classes.userName} variant="h6">
-                    {user.result.name}
+                    {user.result.name.split(" ")[0]}
                   </Typography>
                 </div>
                 <Button
@@ -116,12 +116,13 @@ const Navbar = props => {
                   {...buttonProps}
                   color="secondary"
                   onClick={logout}
+                  size="small"
                 >
                   Logout
                 </Button>
               </div>
             ) : (
-              <Button component={Link} to="/auth" variant="contained" color="primary">
+              <Button component={Link} to="/auth" variant="contained" color="primary" size="small">
                 Sign In
               </Button>
             )}
