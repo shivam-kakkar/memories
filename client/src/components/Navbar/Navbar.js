@@ -8,6 +8,7 @@ import {
   Slide,
   useScrollTrigger,
   useMediaQuery,
+  Tooltip,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -16,6 +17,8 @@ import memories from "../../images/memories.png";
 import useStyles from "./styles";
 import { LOGOUT } from "../../constants/actionTypes";
 import { useTheme } from "@material-ui/core/styles";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import { OPEN_FORM } from "../../constants/actionTypes";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -85,6 +88,16 @@ const Navbar = props => {
           <Toolbar className={classes.toolbar}>
             {user ? (
               <div className={classes.profile}>
+                <Tooltip title="Create Post">
+                  <AddCircleIcon
+                    onClick={() => {
+                      history.push("/");
+                      dispatch({ type: OPEN_FORM });
+                    }}
+                    color="primary"
+                    style={{ cursor: "pointer", fontSize: "40px" }}
+                  />
+                </Tooltip>
                 <div className={classes.titleBar}>
                   <Avatar
                     className={classes.purple}

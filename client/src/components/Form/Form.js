@@ -7,6 +7,7 @@ import { createPost, updatePost } from "../../actions/posts";
 import { clearCurrentId } from "../../actions/currentSelected";
 import MuiAlert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
+import { CLOSE_FORM } from "../../constants/actionTypes";
 
 const Form = () => {
   const [postData, setPostData] = useState({
@@ -23,11 +24,15 @@ const Form = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const open = useSelector(state => state.formOpen);
 
   useEffect(() => {
     if (post) setPostData(post);
     if (!post) setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   }, [post]);
+  // useEffect(() => {
+  //   if (!open) clear();
+  // }, [open]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -43,6 +48,7 @@ const Form = () => {
       }
       document.getElementById("form").reset();
       setAlertOpen(false);
+      dispatch({ type: CLOSE_FORM });
     } else {
       setAlertOpen(true);
     }
@@ -141,9 +147,9 @@ const Form = () => {
         >
           Submit
         </Button>
-        <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
+        {/* <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
           Clear
-        </Button>
+        </Button> */}
       </form>
     </Paper>
   );

@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/posts";
 import { setCurrentId } from "../../../actions/currentSelected";
 import useStyles from "./styles";
+import { OPEN_FORM } from "../../../constants/actionTypes";
 
 const Post = ({ post }) => {
   const dispatch = useDispatch();
@@ -54,7 +55,8 @@ const Post = ({ post }) => {
 
   const handleEdit = () => {
     dispatch(setCurrentId(post._id));
-    window.scrollTo(0, 0);
+    dispatch({ type: OPEN_FORM });
+    // window.scrollTo(0, 0);
   };
 
   return (
