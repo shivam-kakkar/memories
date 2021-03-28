@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles(theme => ({
   media: {
     height: 560,
-    // paddingTop: "96.25%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     backgroundSize: "100% 100%",
     // backgroundBlendMode: "darken",

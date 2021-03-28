@@ -20,3 +20,5 @@ export const CLOSE_FORM = "CLOSE_FORM";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const CLEAR_CURRENT_USER = "CLEAR_CURRENT_USER";
+
+export const SET_ONLINE_USERS = "SET_ONLINE_USERS";

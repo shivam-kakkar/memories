@@ -56,7 +56,6 @@ const Post = ({ post }) => {
   const handleEdit = () => {
     dispatch(setCurrentId(post._id));
     dispatch({ type: OPEN_FORM });
-    // window.scrollTo(0, 0);
   };
 
   return (

@@ -1,13 +1,22 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Typography, Divider, TextField, Button } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Divider, TextField, Button } from "@material-ui/core";
+import Messages from "./Messages/Messages";
 
 const MessageContainer = () => {
-  const users = useSelector(state => state.users);
+  const onlineUsers = useSelector(state => state.online);
   const currentUser = useSelector(state => state.currentSelected.currentUser);
-  const user = users.find(person => person._id === currentUser);
+  const user = onlineUsers.find(person => person.userId === currentUser);
+  const [message, setMessage] = useState("");
 
-  return !user ? (
+  const sendMessage = () => {
+    if (message) {
+      console.log(message);
+      setMessage("");
+    }
+  };
+
+  return !currentUser ? (
     <div
       style={{ display: "flex", height: "100%", justifyContent: "center", alignItems: "center" }}
     >
@@ -15,13 +24,22 @@ const MessageContainer = () => {
     </div>
   ) : (
     <div>
-      <h1 style={{ marginLeft: "20px" }}>{user.name}</h1>
+      <h1 style={{ margin: 0, marginLeft: "20px" }}>{user.name}</h1>
       <Divider />
-      <div style={{ height: "476px", backgroundColor: "#E5DDD5" }}></div>
+      <div style={{ height: "476px", backgroundColor: "#E5DDD5" }}>
+        <Messages />
+      </div>
       <Divider />
       <div style={{ display: "flex" }}>
-        <TextField variant="outlined" size="small" placeholder="Type a message" fullWidth />
-        <Button variant="contained" color="primary">
+        <TextField
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          variant="outlined"
+          size="small"
+          placeholder="Type a message"
+          fullWidth
+        />
+        <Button variant="contained" color="primary" onClick={sendMessage}>
           Send
         </Button>
       </div>

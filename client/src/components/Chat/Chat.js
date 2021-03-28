@@ -8,10 +8,10 @@ const Chat = () => {
     <Grow in>
       <Container maxWidth="md">
         <Grid container style={{ height: "600px", backgroundColor: "#FFFFFF" }}>
-          <Grid item md={4} style={{ borderRight: "3px solid #EFEFEF" }}>
+          <Grid item sm={4} xs={12} style={{ borderRight: "3px solid #EFEFEF" }}>
             <Chats />
           </Grid>
-          <Grid item md={8}>
+          <Grid item sm={8} xs={12}>
             <MessageContainer />
           </Grid>
         </Grid>

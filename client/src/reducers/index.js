@@ -5,5 +5,13 @@ import auth from "./auth";
 import currentSelected from "./currentSelected";
 import users from "./users";
 import form from "./form";
+import onlineUsers from "./onlineUsers";
 
-export const reducers = combineReducers({ posts, auth, currentSelected, users, formOpen: form });
+export const reducers = combineReducers({
+  posts,
+  auth,
+  currentSelected,
+  users,
+  formOpen: form,
+  online: onlineUsers,
+});

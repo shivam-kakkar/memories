@@ -65,8 +65,6 @@ export default makeStyles(theme => ({
       width: "100%",
     },
     profile: {
-      // display: "flex",
-      // justifyContent: "space-between",
       width: "auto",
     },
     titleBar: {

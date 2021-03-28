@@ -30,9 +30,6 @@ const Form = () => {
     if (post) setPostData(post);
     if (!post) setPostData({ title: "", message: "", tags: [], selectedFile: "" });
   }, [post]);
-  // useEffect(() => {
-  //   if (!open) clear();
-  // }, [open]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -147,9 +144,6 @@ const Form = () => {
         >
           Submit
         </Button>
-        {/* <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>
-          Clear
-        </Button> */}
       </form>
     </Paper>
   );

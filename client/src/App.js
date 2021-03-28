@@ -1,11 +1,14 @@
-import React from "react";
-import { colors, Container, Modal } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Container, Modal } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCurrentId, clearPost } from "./actions/currentSelected";
+import { clearCurrentId } from "./actions/currentSelected";
 import { CLOSE_FORM } from "./constants/actionTypes";
 import Form from "./components/Form/Form";
 import CloseIcon from "@material-ui/icons/Close";
+import { getUsers } from "./actions/users";
+import socket from "./socket";
+import { SET_ONLINE_USERS } from "./constants/actionTypes";
 
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
@@ -17,12 +20,36 @@ import useStyles from "./styles";
 const App = () => {
   const classes = useStyles();
   const open = useSelector(state => state.formOpen);
+  const authData = useSelector(state => state.auth.authData);
   const dispatch = useDispatch();
 
   const closeForm = () => {
     dispatch(clearCurrentId());
     dispatch({ type: CLOSE_FORM });
   };
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("profile"))?.result;
+    if (user) {
+      socket.auth = { user };
+      socket.connect();
+    }
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [authData]);
+
+  socket.on("users", users => {
+    const self = JSON.parse(localStorage.getItem("profile"))?.result;
+    users = users.filter(user => user.email !== self.email);
+    dispatch({ type: SET_ONLINE_USERS, payload: users });
+  });
+
   return (
     <BrowserRouter>
       <Navbar />
