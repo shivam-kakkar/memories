@@ -4,6 +4,7 @@ import { Divider, TextField, Button } from "@material-ui/core";
 import Messages from "./Messages/Messages";
 import { addMessage } from "../../../actions/messages";
 import socket from "../../../socket";
+import onlineIcon from "../../../icons/onlineIcon.png";
 
 const MessageContainer = () => {
   const onlineUsers = useSelector(state => state.online);
@@ -31,7 +32,7 @@ const MessageContainer = () => {
     };
   }, []);
 
-  return !currentUser ? (
+  return !currentUser || onlineUsers.length === 0 ? (
     <div
       style={{ display: "flex", height: "100%", justifyContent: "center", alignItems: "center" }}
     >
@@ -39,9 +40,20 @@ const MessageContainer = () => {
     </div>
   ) : (
     <div>
-      <h1 style={{ margin: 0, marginLeft: "20px" }}>{user?.name}</h1>
+      <div
+        style={{
+          backgroundColor: "#5F0A87",
+          padding: "10px",
+          display: "flex",
+          alignItems: "center",
+          paddingLeft: "25px",
+        }}
+      >
+        <img src={onlineIcon} alt="online icon" />
+        <h2 style={{ margin: 0, marginLeft: "8px", color: "white" }}>{user?.name}</h2>
+      </div>
       <Divider />
-      <div style={{ height: "476px", backgroundColor: "#E5DDD5", overflow: "auto" }}>
+      <div style={{ height: "567.2px", backgroundColor: "#E5DDD5", overflow: "auto" }}>
         <Messages />
       </div>
       <Divider />
@@ -51,12 +63,24 @@ const MessageContainer = () => {
           onChange={e => setMessageBody(e.target.value)}
           variant="outlined"
           size="small"
-          placeholder="Type a message"
+          placeholder="Type a message..."
           fullWidth
         />
-        <Button variant="contained" color="primary" onClick={sendMessage}>
+        <button
+          variant="contained"
+          style={{
+            backgroundColor: "#5F0A87",
+            color: "white",
+            fontSize: "15px",
+            fontWeight: "bold",
+            padding: "10px",
+            cursor: "pointer",
+            outline: "none",
+          }}
+          onClick={sendMessage}
+        >
           Send
-        </Button>
+        </button>
       </div>
     </div>
   );

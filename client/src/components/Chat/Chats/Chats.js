@@ -12,7 +12,7 @@ const Chats = () => {
 
   return (
     <div>
-      <h1 className={classes.heading}>Chats</h1>
+      <h2 className={classes.heading}>Chats</h2>
       <div>
         <Divider />
         {usersList.length === 0 ? (

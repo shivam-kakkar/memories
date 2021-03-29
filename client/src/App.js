@@ -78,14 +78,12 @@ const App = () => {
           <Form />
         </div>
       </Modal>
-      <Container maxWidth="lg" className={classes.container}>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/auth" exact component={Auth} />
-          <Route path="/post/:id" exact component={PostScreen} />
-          <Route path="/chat" exact component={Chat} />
-        </Switch>
-      </Container>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/auth" exact component={Auth} />
+        <Route path="/post/:id" exact component={PostScreen} />
+        <Route path="/chat" exact component={Chat} />
+      </Switch>
     </BrowserRouter>
   );
 };

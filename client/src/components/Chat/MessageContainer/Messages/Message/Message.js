@@ -1,32 +1,21 @@
 import React, { useEffect } from "react";
+import useStyles from "./styles";
 
 const Message = ({ message }) => {
+  const classes = useStyles();
   const selfEmail = JSON.parse(localStorage.getItem("profile")).result.email;
   const senderEmail = message.from;
   const messageBody = message.messageBody;
 
   return selfEmail === senderEmail ? (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "flex-end",
-        padding: "5px",
-        margin: "5px 0",
-      }}
-    >
-      <span style={{ backgroundColor: "green", padding: "10px", borderRadius: "10px" }}>
+    <div style={{ justifyContent: "flex-end" }} className={classes.messageContainer}>
+      <span style={{ backgroundColor: "#5F0A87", color: "white" }} className={classes.messageBox}>
         {messageBody}
       </span>
     </div>
   ) : (
-    <div
-      style={{
-        padding: "5px",
-        margin: "5px 0",
-        borderRadius: "10px",
-      }}
-    >
-      <span style={{ backgroundColor: "white", padding: "5px", borderRadius: "10px" }}>
+    <div className={classes.messageContainer}>
+      <span className={classes.messageBox} style={{ backgroundColor: "white" }}>
         {messageBody}
       </span>
     </div>

@@ -51,16 +51,6 @@ const Form = () => {
     }
   };
 
-  if (!user?.result?.name) {
-    return (
-      <Paper className={classes.paper}>
-        <Typography variant="h6" align="center">
-          Please Sign In to create your own memories and like other's memories
-        </Typography>
-      </Paper>
-    );
-  }
-
   const clear = () => {
     dispatch(clearCurrentId());
     setPostData({ title: "", message: "", tags: [], selectedFile: "" });

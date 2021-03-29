@@ -89,124 +89,133 @@ const PostScreen = ({ history, match }) => {
   return !post ? (
     <CircularProgress />
   ) : (
-    <Grow in>
-      <Container maxWidth="md" style={{ padding: 0 }}>
-        <Grid container>
-          <Grid item xs={12} sm={7}>
-            <CardMedia
-              className={classes.media}
-              image={
-                post.selectedFile ||
-                "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
-              }
-              title={post.title}
-            />
-          </Grid>
-          <Grid
-            container
-            item
-            direction="column"
-            xs={12}
-            sm={5}
-            className={classes.contentContainer}
-          >
-            <div>
-              <div className={classes.profile}>
-                <div style={{ display: "flex" }}>
-                  <Avatar className={classes.avatar}>{post.name.charAt(0)}</Avatar>
-                  <Typography className={classes.userName} variant="h6">
-                    {post.name}
+    <Container maxWidth="lg" className={classes.container}>
+      <Grow in>
+        <Container maxWidth="md" style={{ padding: 0 }}>
+          <Grid container>
+            <Grid item xs={12} sm={7}>
+              <CardMedia
+                className={classes.media}
+                image={
+                  post.selectedFile ||
+                  "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                }
+                title={post.title}
+              />
+            </Grid>
+            <Grid
+              container
+              item
+              direction="column"
+              xs={12}
+              sm={5}
+              className={classes.contentContainer}
+            >
+              <div>
+                <div className={classes.profile}>
+                  <div style={{ display: "flex" }}>
+                    <Avatar className={classes.avatar}>{post.name.charAt(0)}</Avatar>
+                    <Typography className={classes.userName} variant="h6">
+                      {post.name}
+                    </Typography>
+                  </div>
+                  <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+                </div>
+                <hr className={classes.horizontal} />
+                <div id="middle" className={classes.middleContainer}>
+                  <Typography className={classes.title} gutterBottom variant="h5" component="h2">
+                    {post.title}
                   </Typography>
-                </div>
-                <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-              </div>
-              <hr className={classes.horizontal} />
-              <div id="middle" className={classes.middleContainer}>
-                <Typography className={classes.title} gutterBottom variant="h5" component="h2">
-                  {post.title}
-                </Typography>
-                <CardContent>
-                  <Typography className={classes.message} variant="body2" component="p">
-                    {post.message}
-                  </Typography>
-                </CardContent>
-                <div className={classes.details}>
-                  <Typography variant="body2" color="textSecondary" component="h2">
-                    {post.tags.map(tag => `#${tag} `)}
-                  </Typography>
-                </div>
-                <div>
-                  <hr className={classes.horizontal} />
-                  <Typography style={{ padding: "0 5px" }} variant="h5">
-                    comments({post.comments.length})
-                  </Typography>
-                </div>
-                <div style={{ padding: "5px" }}>
-                  {post.comments.map(comment => (
-                    <div
-                      key={comment._id}
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        padding: "2px 0",
-                      }}
-                    >
-                      <Avatar className={classes.avatarComment} alt={comment.name}>
-                        {comment.name.charAt(0)}
-                      </Avatar>
-                      <p style={{ margin: 0, padding: "3px 0 0 0" }}>
-                        <span style={{ color: "#484848", fontWeight: "bold" }}>{comment.name}</span>{" "}
-                        <span style={{ wordBreak: "break-word" }}>{comment.body}</span>
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div>
-              <hr className={classes.horizontal} />
-              <CardActions className={classes.cardActions}>
-                <Button size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
-                  <Likes />
-                </Button>
-                <Button color="primary" onClick={focus}>
-                  <CommentOutlined fontSize="small" />
-                </Button>
-                {user?.result?.email === post?.creator && (
-                  <Button size="small" color="primary" onClick={handleDelete}>
-                    <DeleteIcon fontSize="small" /> Delete
-                  </Button>
-                )}
-              </CardActions>
-              {user?.result ? (
-                <div className={classes.commentDiv}>
-                  <TextField
-                    id="comment"
-                    variant="outlined"
-                    size="small"
-                    style={{ padding: "2px 0", width: "77%" }}
-                    placeholder="Add a comment"
-                    value={commentBody}
-                    onChange={e => setCommentBody(e.target.value)}
-                  />
-                  <Button onClick={handleComment}>Post</Button>
-                </div>
-              ) : (
-                <div>
-                  <hr className={classes.horizontal} />
-                  <div style={{ textAlign: "center", paddingBottom: "5px" }}>
-                    <Link to="/auth" style={{ textDecoration: "none" }}>
-                      Login
-                    </Link>{" "}
-                    to like or comment{" "}
+                  <CardContent>
+                    <Typography className={classes.message} variant="body2" component="p">
+                      {post.message}
+                    </Typography>
+                  </CardContent>
+                  <div className={classes.details}>
+                    <Typography variant="body2" color="textSecondary" component="h2">
+                      {post.tags.map(tag => `#${tag} `)}
+                    </Typography>
+                  </div>
+                  <div>
+                    <hr className={classes.horizontal} />
+                    <Typography style={{ padding: "0 5px" }} variant="h5">
+                      comments({post.comments.length})
+                    </Typography>
+                  </div>
+                  <div style={{ padding: "5px" }}>
+                    {post.comments.map(comment => (
+                      <div
+                        key={comment._id}
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-start",
+                          padding: "2px 0",
+                        }}
+                      >
+                        <Avatar className={classes.avatarComment} alt={comment.name}>
+                          {comment.name.charAt(0)}
+                        </Avatar>
+                        <p style={{ margin: 0, padding: "3px 0 0 0" }}>
+                          <span style={{ color: "#484848", fontWeight: "bold" }}>
+                            {comment.name}
+                          </span>{" "}
+                          <span style={{ wordBreak: "break-word" }}>{comment.body}</span>
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+              <div>
+                <hr className={classes.horizontal} />
+                <CardActions className={classes.cardActions}>
+                  <Button
+                    size="small"
+                    color="primary"
+                    disabled={!user?.result}
+                    onClick={handleLike}
+                  >
+                    <Likes />
+                  </Button>
+                  <Button color="primary" onClick={focus}>
+                    <CommentOutlined fontSize="small" />
+                  </Button>
+                  {user?.result?.email === post?.creator && (
+                    <Button size="small" color="primary" onClick={handleDelete}>
+                      <DeleteIcon fontSize="small" /> Delete
+                    </Button>
+                  )}
+                </CardActions>
+                {user?.result ? (
+                  <div className={classes.commentDiv}>
+                    <TextField
+                      id="comment"
+                      variant="outlined"
+                      size="small"
+                      style={{ padding: "2px 0", width: "77%" }}
+                      placeholder="Add a comment"
+                      value={commentBody}
+                      onChange={e => setCommentBody(e.target.value)}
+                    />
+                    <Button onClick={handleComment}>Post</Button>
+                  </div>
+                ) : (
+                  <div>
+                    <hr className={classes.horizontal} />
+                    <div style={{ textAlign: "center", paddingBottom: "5px" }}>
+                      <Link to="/auth" style={{ textDecoration: "none" }}>
+                        Login
+                      </Link>{" "}
+                      to like or comment{" "}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </Grow>
+        </Container>
+      </Grow>
+    </Container>
   );
 };
 

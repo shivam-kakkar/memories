@@ -6,16 +6,16 @@ import MessageContainer from "./MessageContainer/MessageContainer";
 const Chat = () => {
   return (
     <Grow in>
-      <Container maxWidth="md">
-        <Grid container style={{ height: "600px", backgroundColor: "#FFFFFF" }}>
-          <Grid item sm={4} xs={12} style={{ borderRight: "3px solid #EFEFEF" }}>
-            <Chats />
-          </Grid>
-          <Grid item sm={8} xs={12}>
-            <MessageContainer />
-          </Grid>
+      {/* <Container> */}
+      <Grid container style={{ backgroundColor: "#FFFFFF", height: "91vh" }}>
+        <Grid item sm={3} xs={12} style={{ borderRight: "3px solid #EFEFEF" }}>
+          <Chats />
         </Grid>
-      </Container>
+        <Grid item sm={9} xs={12}>
+          <MessageContainer />
+        </Grid>
+      </Grid>
+      {/* </Container> */}
     </Grow>
   );
 };

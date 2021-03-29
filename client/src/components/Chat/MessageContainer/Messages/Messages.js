@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Message from "./Message/Message";
 import { useSelector } from "react-redux";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const Messages = () => {
   const allMessages = useSelector(state => state.messages);
@@ -11,13 +12,13 @@ const Messages = () => {
   );
 
   return (
-    <div>
+    <ScrollToBottom>
       {messages.map(message => (
         <div>
           <Message message={message} />
         </div>
       ))}
-    </div>
+    </ScrollToBottom>
   );
 };
 

@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(theme => ({
+  container: {
+    marginTop: "30px",
+  },
   media: {
     height: 560,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -68,6 +71,10 @@ export default makeStyles(theme => ({
     alignItems: "center",
   },
   [theme.breakpoints.down("xs")]: {
+    container: {
+      marginTop: 0,
+      padding: 0,
+    },
     middleContainer: {
       maxHeight: "100%",
     },
@@ -75,9 +82,4 @@ export default makeStyles(theme => ({
       height: 400,
     },
   },
-  // [theme.breakpoints.down("sm")]: {
-  //   middleContainer: {
-  //     maxHeight: "130px",
-  //   },
-  // },
 }));

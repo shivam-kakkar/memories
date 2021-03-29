@@ -23,19 +23,21 @@ const Home = () => {
   }, []);
 
   return (
-    <Grow in>
-      <Container>
-        <Grid
-          className={classes.mainContainer}
-          container
-          justify="space-between"
-          alignItems="stretch"
-          spacing={3}
-        >
-          <Posts />
-        </Grid>
-      </Container>
-    </Grow>
+    <Container maxWidth="lg" className={classes.container}>
+      <Grow in>
+        <Container>
+          <Grid
+            className={classes.mainContainer}
+            container
+            justify="space-between"
+            alignItems="stretch"
+            spacing={3}
+          >
+            <Posts />
+          </Grid>
+        </Container>
+      </Grow>
+    </Container>
   );
 };
 
