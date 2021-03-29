@@ -20,23 +20,37 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
+let users = [];
+
 io.on("connection", socket => {
-  // console.log(socket.handshake.auth.user.name);
   console.log("connected");
-  let users = [];
-  for (let [id, socket] of io.of("/").sockets) {
-    const user = socket.handshake.auth.user;
+  const user = socket.handshake.auth.user;
+  const existingUser = users.find(person => person.email === user.email);
+  if (existingUser) {
+    existingUser.sockets.push(socket.id);
+  } else {
     users.push({
-      userId: id,
       email: user.email,
       name: user.name,
+      sockets: [socket.id],
     });
   }
+  console.log(users);
   io.sockets.emit("users", users);
 
   socket.on("disconnect", () => {
     console.log("disconnected");
-    users = users.filter(person => person.userId != socket.id);
+    const userEmail = socket.handshake.auth.user.email;
+    let disconnectedUser = users.find(person => person.email === userEmail);
+    const socketsCount = disconnectedUser.sockets.length;
+    if (socketsCount > 1) {
+      const sockets = disconnectedUser.sockets;
+      const updatedSockets = sockets.filter(socketId => socketId !== socket.id);
+      disconnectedUser.sockets = updatedSockets;
+    } else if (socketsCount === 1) {
+      users = users.filter(person => person.email != userEmail);
+    }
+
     console.log(users);
     socket.broadcast.emit("users", users);
   });
