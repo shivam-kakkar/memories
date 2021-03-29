@@ -11,19 +11,25 @@ const Chats = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <div>
       <h1 className={classes.heading}>Chats</h1>
       <div>
         <Divider />
         {usersList.length === 0 ? (
-          <h1>No users currently online</h1>
+          <div
+            style={{
+              display: "flex",
+              height: "440px",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <h2>No users currently online</h2>
+          </div>
         ) : (
           usersList.map(user => (
-            <div key={user.userId}>
-              <div
-                className={classes.chatDiv}
-                onClick={() => dispatch(setCurrentUser(user.userId))}
-              >
+            <div key={user.email}>
+              <div className={classes.chatDiv} onClick={() => dispatch(setCurrentUser(user.email))}>
                 <Typography variant="h6" style={{ textAlign: "center" }}>
                   {user.name}
                 </Typography>
@@ -33,7 +39,7 @@ const Chats = () => {
           ))
         )}
       </div>
-    </>
+    </div>
   );
 };
 

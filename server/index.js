@@ -21,6 +21,7 @@ app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
 let users = [];
+let messages = [];
 
 io.on("connection", socket => {
   console.log("connected");
@@ -37,6 +38,15 @@ io.on("connection", socket => {
   }
   console.log(users);
   io.sockets.emit("users", users);
+
+  socket.on("sendMessage", message => {
+    // console.log(message);
+    const sockets = users.find(person => person.email === message.to).sockets;
+    sockets.map(socketId => {
+      io.to(socketId).emit("receiveMessage", message);
+      console.log("sent");
+    });
+  });
 
   socket.on("disconnect", () => {
     console.log("disconnected");

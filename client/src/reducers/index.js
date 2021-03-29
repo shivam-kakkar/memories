@@ -6,6 +6,7 @@ import currentSelected from "./currentSelected";
 import users from "./users";
 import form from "./form";
 import onlineUsers from "./onlineUsers";
+import messages from "./messages";
 
 export const reducers = combineReducers({
   posts,
@@ -14,4 +15,5 @@ export const reducers = combineReducers({
   users,
   formOpen: form,
   online: onlineUsers,
+  messages,
 });

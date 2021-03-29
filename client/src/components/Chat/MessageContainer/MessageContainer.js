@@ -1,20 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Divider, TextField, Button } from "@material-ui/core";
 import Messages from "./Messages/Messages";
+import { addMessage } from "../../../actions/messages";
+import socket from "../../../socket";
 
 const MessageContainer = () => {
   const onlineUsers = useSelector(state => state.online);
   const currentUser = useSelector(state => state.currentSelected.currentUser);
-  const user = onlineUsers.find(person => person.userId === currentUser);
-  const [message, setMessage] = useState("");
+  const user = onlineUsers.find(person => person.email === currentUser);
+  const [messageBody, setMessageBody] = useState("");
+  const selfUser = JSON.parse(localStorage.getItem("profile")).result;
+  const dispatch = useDispatch();
 
   const sendMessage = () => {
-    if (message) {
-      console.log(message);
-      setMessage("");
+    if (messageBody) {
+      const message = { from: selfUser.email, to: currentUser, messageBody: messageBody };
+      dispatch(addMessage(message));
+      socket.emit("sendMessage", message);
+      setMessageBody("");
     }
   };
+  useEffect(() => {
+    socket.on("receiveMessage", message => {
+      console.log(message.messageBody);
+      dispatch(addMessage(message));
+    });
+    return () => {
+      socket.off("receiveMessage");
+    };
+  }, []);
 
   return !currentUser ? (
     <div
@@ -24,16 +39,16 @@ const MessageContainer = () => {
     </div>
   ) : (
     <div>
-      <h1 style={{ margin: 0, marginLeft: "20px" }}>{user.name}</h1>
+      <h1 style={{ margin: 0, marginLeft: "20px" }}>{user?.name}</h1>
       <Divider />
-      <div style={{ height: "476px", backgroundColor: "#E5DDD5" }}>
+      <div style={{ height: "476px", backgroundColor: "#E5DDD5", overflow: "auto" }}>
         <Messages />
       </div>
       <Divider />
       <div style={{ display: "flex" }}>
         <TextField
-          value={message}
-          onChange={e => setMessage(e.target.value)}
+          value={messageBody}
+          onChange={e => setMessageBody(e.target.value)}
           variant="outlined"
           size="small"
           placeholder="Type a message"
