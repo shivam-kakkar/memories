@@ -33,6 +33,11 @@ export default makeStyles({
     right: "20px",
     color: "white",
   },
+  postBody: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
   grid: {
     display: "flex",
   },
@@ -48,6 +53,10 @@ export default makeStyles({
   },
   message: {
     wordBreak: "break-word",
+  },
+  moreIcon: {
+    color: "grey",
+    cursor: "pointer",
   },
   cardActions: {
     padding: "0 16px 8px 16px",

@@ -83,7 +83,7 @@ const Post = ({ post }) => {
           </Tooltip>
         </div>
       )}
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      <div className={classes.postBody}>
         <Typography noWrap className={classes.title} gutterBottom variant="h5" component="h2">
           {post.title}
         </Typography>
@@ -92,7 +92,7 @@ const Post = ({ post }) => {
             {post.message.substring(0, 84)}{" "}
             {post.message.length > 84 && (
               <Link to={`post/${post._id}`} style={{ textDecoration: "none" }}>
-                <span style={{ color: "grey", cursor: "pointer" }}>...more</span>
+                <span className={classes.moreIcon}>...more</span>
               </Link>
             )}
           </Typography>

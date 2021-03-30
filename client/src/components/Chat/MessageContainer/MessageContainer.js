@@ -5,8 +5,10 @@ import Messages from "./Messages/Messages";
 import { addMessage } from "../../../actions/messages";
 import socket from "../../../socket";
 import onlineIcon from "../../../icons/onlineIcon.png";
+import useStyles from "./styles";
 
 const MessageContainer = () => {
+  const classes = useStyles();
   const onlineUsers = useSelector(state => state.online);
   const currentUser = useSelector(state => state.currentSelected.currentUser);
   const user = onlineUsers.find(person => person.email === currentUser);
@@ -33,27 +35,17 @@ const MessageContainer = () => {
   }, []);
 
   return !currentUser || onlineUsers.length === 0 ? (
-    <div
-      style={{ display: "flex", height: "100%", justifyContent: "center", alignItems: "center" }}
-    >
+    <div className={classes.beforeChat}>
       <h2>Select a Chat to Start Messaging</h2>
     </div>
   ) : (
-    <div>
-      <div
-        style={{
-          backgroundColor: "#5F0A87",
-          padding: "10px",
-          display: "flex",
-          alignItems: "center",
-          paddingLeft: "25px",
-        }}
-      >
+    <div style={{ height: "100%" }}>
+      <div className={classes.afterChat}>
         <img src={onlineIcon} alt="online icon" />
-        <h2 style={{ margin: 0, marginLeft: "8px", color: "white" }}>{user?.name}</h2>
+        <h2 className={classes.chatUser}>{user?.name}</h2>
       </div>
       <Divider />
-      <div style={{ height: "567.2px", backgroundColor: "#E5DDD5", overflow: "auto" }}>
+      <div className={classes.messagesContainer}>
         <Messages />
       </div>
       <Divider />
@@ -65,20 +57,9 @@ const MessageContainer = () => {
           size="small"
           placeholder="Type a message..."
           fullWidth
+          onKeyPress={event => (event.key === "Enter" ? sendMessage() : null)}
         />
-        <button
-          variant="contained"
-          style={{
-            backgroundColor: "#5F0A87",
-            color: "white",
-            fontSize: "15px",
-            fontWeight: "bold",
-            padding: "10px",
-            cursor: "pointer",
-            outline: "none",
-          }}
-          onClick={sendMessage}
-        >
+        <button className={classes.sendButton} onClick={sendMessage}>
           Send
         </button>
       </div>

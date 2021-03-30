@@ -12,4 +12,8 @@ export default makeStyles(theme => ({
     wordWrap: "break-word",
     maxWidth: "60%",
   },
+  backgroundBlue: {
+    backgroundColor: "#5F0A87",
+    color: "white",
+  },
 }));

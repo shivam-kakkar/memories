@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Modal } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCurrentId } from "./actions/currentSelected";
@@ -54,27 +54,8 @@ const App = () => {
     <BrowserRouter>
       <Navbar />
       <Modal open={open} onClose={() => closeForm()}>
-        <div
-          style={{
-            position: "absolute",
-            maxWidth: 400,
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-            background: "#FFFFFF",
-            outline: "none",
-          }}
-        >
-          <CloseIcon
-            style={{
-              position: "absolute",
-              right: "5px",
-              top: "5px",
-              cursor: "pointer",
-              color: "#999999",
-            }}
-            onClick={() => closeForm()}
-          />
+        <div className={classes.modalDiv}>
+          <CloseIcon className={classes.modalCloseIcon} onClick={() => closeForm()} />
           <Form />
         </div>
       </Modal>

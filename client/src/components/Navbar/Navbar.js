@@ -96,12 +96,12 @@ const Navbar = props => {
                       dispatch({ type: OPEN_FORM });
                     }}
                     color="primary"
-                    style={{ cursor: "pointer", fontSize: "40px" }}
+                    className={classes.addIcon}
                   />
                 </Tooltip>
                 <Tooltip title="Chat">
                   <Link to="/chat">
-                    <TelegramIcon color="primary" style={{ cursor: "pointer", fontSize: "40px" }} />
+                    <TelegramIcon color="primary" className={classes.chatIcon} />
                   </Link>
                 </Tooltip>
                 <div className={classes.titleBar}>

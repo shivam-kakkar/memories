@@ -16,20 +16,20 @@ const Chats = () => {
       <div>
         <Divider />
         {usersList.length === 0 ? (
-          <div
-            style={{
-              display: "flex",
-              height: "440px",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className={classes.noOnline}>
             <h2>No users currently online</h2>
           </div>
         ) : (
           usersList.map(user => (
             <div key={user.email}>
-              <div className={classes.chatDiv} onClick={() => dispatch(setCurrentUser(user.email))}>
+              <div
+                style={{
+                  backgroundColor: currentUser === user.email ? "#5F0A87" : null,
+                  color: currentUser === user.email ? "white" : null,
+                }}
+                className={classes.chatDiv}
+                onClick={() => dispatch(setCurrentUser(user.email))}
+              >
                 <Typography variant="h6" style={{ textAlign: "center" }}>
                   {user.name}
                 </Typography>

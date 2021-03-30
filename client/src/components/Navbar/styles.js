@@ -49,6 +49,14 @@ export default makeStyles(theme => ({
     width: theme.spacing(4),
     height: theme.spacing(4),
   },
+  addIcon: {
+    cursor: "pointer",
+    fontSize: "40px",
+  },
+  chatIcon: {
+    cursor: "pointer",
+    fontSize: "40px",
+  },
   [theme.breakpoints.down("sm")]: {
     mainContainer: {
       flexDirection: "column-reverse",

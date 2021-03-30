@@ -10,8 +10,13 @@ export default makeStyles(theme => ({
     cursor: "pointer",
     padding: "5px 0",
     "&:hover": {
-      backgroundColor: "#5F0A87",
-      color: "white",
+      backgroundColor: "#E5DDD5",
     },
+  },
+  noOnline: {
+    display: "flex",
+    height: "500px",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
