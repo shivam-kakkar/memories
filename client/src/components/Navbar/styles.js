@@ -8,8 +8,9 @@ export default makeStyles(theme => ({
     justifyContent: "space-around",
   },
   heading: {
-    color: "rgba(0,183,255, 1)",
+    color: "#00A4E5",
     textDecoration: "none",
+    fontWeight: "bold",
   },
   image: {
     marginLeft: "15px",

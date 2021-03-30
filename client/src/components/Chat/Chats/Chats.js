@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Divider } from "@material-ui/core";
+import React from "react";
+import { Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../../actions/currentSelected";
 import useStyles from "./styles";
@@ -14,7 +14,7 @@ const Chats = () => {
     <div>
       <h2 className={classes.heading}>Chats</h2>
       <div>
-        <Divider />
+        {/* <Divider /> */}
         {usersList.length === 0 ? (
           <div className={classes.noOnline}>
             <h2>No users currently online</h2>
@@ -24,8 +24,8 @@ const Chats = () => {
             <div key={user.email}>
               <div
                 style={{
-                  backgroundColor: currentUser === user.email ? "#5F0A87" : null,
-                  color: currentUser === user.email ? "white" : null,
+                  backgroundColor: currentUser === user.email ? "#FFFFFF" : null,
+                  color: currentUser === user.email ? "#000000" : null,
                 }}
                 className={classes.chatDiv}
                 onClick={() => dispatch(setCurrentUser(user.email))}
@@ -34,7 +34,7 @@ const Chats = () => {
                   {user.name}
                 </Typography>
               </div>
-              <Divider />
+              {/* <Divider /> */}
             </div>
           ))
         )}

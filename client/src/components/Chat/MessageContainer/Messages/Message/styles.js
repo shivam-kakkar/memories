@@ -13,7 +13,8 @@ export default makeStyles(theme => ({
     maxWidth: "60%",
   },
   backgroundBlue: {
-    backgroundColor: "#5F0A87",
+    // backgroundColor: "#5F0A87",
+    backgroundColor: "#00A4E5",
     color: "white",
   },
 }));

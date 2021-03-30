@@ -24,7 +24,6 @@ const Form = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
-  const open = useSelector(state => state.formOpen);
 
   useEffect(() => {
     if (post) setPostData(post);

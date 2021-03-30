@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useStyles from "./styles";
 
 const Message = ({ message }) => {
@@ -13,7 +13,7 @@ const Message = ({ message }) => {
     </div>
   ) : (
     <div className={classes.messageContainer}>
-      <span className={classes.messageBox} style={{ backgroundColor: "white" }}>
+      <span className={classes.messageBox} style={{ backgroundColor: "#EDEDED" }}>
         {messageBody}
       </span>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Divider, TextField, Button } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import Messages from "./Messages/Messages";
 import { addMessage } from "../../../actions/messages";
 import socket from "../../../socket";
@@ -26,6 +26,7 @@ const MessageContainer = () => {
   };
   useEffect(() => {
     socket.on("receiveMessage", message => {
+      console.log("received");
       console.log(message.messageBody);
       dispatch(addMessage(message));
     });
@@ -36,7 +37,7 @@ const MessageContainer = () => {
 
   return !currentUser || onlineUsers.length === 0 ? (
     <div className={classes.beforeChat}>
-      <h2>Select a Chat to Start Messaging</h2>
+      {onlineUsers.length !== 0 && <h2>Select a Chat to Start Messaging</h2>}
     </div>
   ) : (
     <div style={{ height: "100%" }}>
@@ -44,12 +45,10 @@ const MessageContainer = () => {
         <img src={onlineIcon} alt="online icon" />
         <h2 className={classes.chatUser}>{user?.name}</h2>
       </div>
-      <Divider />
       <div className={classes.messagesContainer}>
         <Messages />
       </div>
-      <Divider />
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", backgroundColor: "#FFFFFF" }}>
         <TextField
           value={messageBody}
           onChange={e => setMessageBody(e.target.value)}
@@ -59,9 +58,9 @@ const MessageContainer = () => {
           fullWidth
           onKeyPress={event => (event.key === "Enter" ? sendMessage() : null)}
         />
-        <button className={classes.sendButton} onClick={sendMessage}>
+        <Button className={classes.sendButton} onClick={sendMessage}>
           Send
-        </button>
+        </Button>
       </div>
     </div>
   );

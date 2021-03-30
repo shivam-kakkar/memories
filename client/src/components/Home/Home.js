@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Container, Grow, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { clearCurrentId, clearPost } from "../../actions/currentSelected";
+import { clearCurrentId, clearPost, clearCurrentUser } from "../../actions/currentSelected";
 
 import { getPosts } from "../../actions/posts";
 import { getUsers } from "../../actions/users";
@@ -20,6 +20,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(clearCurrentId());
     dispatch(clearPost());
+    dispatch(clearCurrentUser());
   }, []);
 
   return (

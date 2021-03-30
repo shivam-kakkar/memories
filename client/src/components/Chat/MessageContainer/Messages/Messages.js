@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Message from "./Message/Message";
 import { useSelector } from "react-redux";
 import ScrollToBottom from "react-scroll-to-bottom";

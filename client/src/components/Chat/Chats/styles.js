@@ -5,12 +5,16 @@ export default makeStyles(theme => ({
     textAlign: "center",
     margin: 0,
     padding: "10px",
+    // backgroundColor: "#18B7FF",
+    color: "#FFFFFF",
   },
   chatDiv: {
     cursor: "pointer",
     padding: "5px 0",
+    color: "#FFFFFF",
     "&:hover": {
-      backgroundColor: "#E5DDD5",
+      backgroundColor: "#F5F5F5",
+      color: "#000000",
     },
   },
   noOnline: {
@@ -18,5 +22,6 @@ export default makeStyles(theme => ({
     height: "500px",
     justifyContent: "center",
     alignItems: "center",
+    color: "#FFFFFF",
   },
 }));

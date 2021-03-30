@@ -6,9 +6,10 @@ export default makeStyles(theme => ({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#FFFFFF",
   },
   afterChat: {
-    backgroundColor: "#5F0A87",
+    backgroundColor: "#00A4E5",
     padding: "10px",
     display: "flex",
     alignItems: "center",
@@ -20,11 +21,11 @@ export default makeStyles(theme => ({
     color: "white",
   },
   messagesContainer: {
-    backgroundColor: "#E5DDD5",
+    backgroundColor: "#FFFFFF",
     overflow: "auto",
   },
   sendButton: {
-    backgroundColor: "#5F0A87",
+    backgroundColor: "#00A4E5",
     color: "white",
     fontSize: "15px",
     fontWeight: "bold",
