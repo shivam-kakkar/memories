@@ -68,11 +68,13 @@ const PostScreen = ({ history, match }) => {
   };
 
   const handleComment = async () => {
-    await dispatch(commentPost(post._id, { body: commentBody, name: user.result.name }));
-    setCommentBody("");
-    await dispatch(getPost(id));
-    var middleContainer = document.getElementById("middle");
-    middleContainer.scrollTop = middleContainer.scrollHeight;
+    if (commentBody !== "") {
+      await dispatch(commentPost(post._id, { body: commentBody, name: user.result.name }));
+      setCommentBody("");
+      await dispatch(getPost(id));
+      var middleContainer = document.getElementById("middle");
+      middleContainer.scrollTop = middleContainer.scrollHeight;
+    }
   };
 
   const handleLike = async () => {
@@ -196,8 +198,11 @@ const PostScreen = ({ history, match }) => {
                       placeholder="Add a comment"
                       value={commentBody}
                       onChange={e => setCommentBody(e.target.value)}
+                      onKeyPress={event => (event.key === "Enter" ? handleComment() : null)}
                     />
-                    <Button onClick={handleComment}>Post</Button>
+                    <Button disabled={commentBody === ""} onClick={handleComment}>
+                      Post
+                    </Button>
                   </div>
                 ) : (
                   <div>

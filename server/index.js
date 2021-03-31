@@ -21,7 +21,18 @@ app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
 let users = [];
-let messages = [];
+let messages = {};
+
+app.get("/messages", (req, res) => {
+  res.status(200).json(messages);
+});
+
+app.get("/messages/:email", (req, res) => {
+  const { email } = req.params;
+  res.status(200).json(messages[email]);
+});
+
+export default messages;
 
 io.on("connection", socket => {
   console.log("connected");
@@ -45,6 +56,30 @@ io.on("connection", socket => {
     sockets.map(socketId => {
       io.to(socketId).emit("receiveMessage", message);
       console.log("sent");
+    });
+  });
+  socket.on("sendMessage", message => {
+    const from = message.from;
+    const to = message.to;
+
+    if (!messages.hasOwnProperty(from)) {
+      messages[from] = [message];
+    } else {
+      messages[from].push(message);
+    }
+    if (!messages.hasOwnProperty(to)) {
+      messages[to] = [message];
+    } else {
+      messages[to].push(message);
+    }
+    console.log(messages);
+    const senderSockets = users.find(person => person.email === message.from).sockets;
+    senderSockets.map(socketId => {
+      io.to(socketId).emit("setMessage", messages[from]);
+    });
+    const receiverSockets = users.find(person => person.email === message.to).sockets;
+    receiverSockets.map(socketId => {
+      io.to(socketId).emit("setMessage", messages[to]);
     });
   });
 

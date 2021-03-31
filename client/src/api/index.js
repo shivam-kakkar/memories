@@ -21,3 +21,5 @@ export const commentPost = (id, comment) => API.patch(`/posts/${id}/commentPost`
 export const signIn = FormData => API.post("/user/signin", FormData);
 export const signUp = FormData => API.post("/user/signup", FormData);
 export const fetchUsers = () => API.get("/user/users");
+
+export const getMessages = email => API.get(`/messages/${email}`);

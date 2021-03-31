@@ -23,14 +23,22 @@ const Chats = () => {
           usersList.map(user => (
             <div key={user.email}>
               <div
-                style={{
-                  backgroundColor: currentUser === user.email ? "#FFFFFF" : null,
-                  color: currentUser === user.email ? "#000000" : null,
-                }}
+                // style={{
+                //   backgroundColor: currentUser === user.email ? "#FFFFFF" : "#F5F5F5",
+                //   color: currentUser === user.email ? "#000000" : null,
+                // }}
                 className={classes.chatDiv}
                 onClick={() => dispatch(setCurrentUser(user.email))}
               >
-                <Typography variant="h6" style={{ textAlign: "center" }}>
+                <Typography
+                  variant="h6"
+                  style={{
+                    backgroundColor: currentUser === user.email ? "#FFFFFF" : null,
+                    color: currentUser === user.email ? "#000000" : null,
+                    // border: "1px solid #000000",
+                  }}
+                  className={classes.chatItem}
+                >
                   {user.name}
                 </Typography>
               </div>

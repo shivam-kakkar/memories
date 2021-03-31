@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TextField, Button } from "@material-ui/core";
 import Messages from "./Messages/Messages";
-import { addMessage } from "../../../actions/messages";
+import { setMessages } from "../../../actions/messages";
 import socket from "../../../socket";
 import onlineIcon from "../../../icons/onlineIcon.png";
 import useStyles from "./styles";
+import { getMessages } from "../../../api/index";
 
 const MessageContainer = () => {
   const classes = useStyles();
@@ -19,20 +20,28 @@ const MessageContainer = () => {
   const sendMessage = () => {
     if (messageBody) {
       const message = { from: selfUser.email, to: currentUser, messageBody: messageBody };
-      dispatch(addMessage(message));
       socket.emit("sendMessage", message);
       setMessageBody("");
     }
   };
   useEffect(() => {
-    socket.on("receiveMessage", message => {
-      console.log("received");
-      console.log(message.messageBody);
-      dispatch(addMessage(message));
+    socket.on("setMessage", messages => {
+      dispatch(setMessages(messages));
     });
     return () => {
-      socket.off("receiveMessage");
+      socket.off("setMessage");
     };
+  }, []);
+
+  useEffect(async () => {
+    const email = JSON.parse(localStorage.getItem("profile"))?.result?.email;
+    if (email) {
+      const { data } = await getMessages(email);
+      if (data) {
+        console.log(data);
+        dispatch(setMessages(data));
+      }
+    }
   }, []);
 
   return !currentUser || onlineUsers.length === 0 ? (

@@ -1,6 +1,6 @@
-import { ADD_MESSAGE } from "../constants/actionTypes";
+import { SET_MESSAGES } from "../constants/actionTypes";
 
-export const addMessage = message => ({
-  type: ADD_MESSAGE,
+export const setMessages = message => ({
+  type: SET_MESSAGES,
   payload: message,
 });

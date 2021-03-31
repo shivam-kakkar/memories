@@ -32,5 +32,8 @@ export default makeStyles(theme => ({
     padding: "10px",
     cursor: "pointer",
     outline: "none",
+    "&:hover": {
+      backgroundColor: "#00A4E5",
+    },
   },
 }));

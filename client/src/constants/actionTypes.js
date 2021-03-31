@@ -23,4 +23,4 @@ export const CLEAR_CURRENT_USER = "CLEAR_CURRENT_USER";
 
 export const SET_ONLINE_USERS = "SET_ONLINE_USERS";
 
-export const ADD_MESSAGE = "ADD_MESSAGE";
+export const SET_MESSAGES = "SET_MESSAGES";

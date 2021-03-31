@@ -1,9 +1,9 @@
-import { ADD_MESSAGE } from "../constants/actionTypes";
+import { SET_MESSAGES } from "../constants/actionTypes";
 
 const messagesReducer = (messages = [], action) => {
   switch (action.type) {
-    case ADD_MESSAGE:
-      return [...messages, action.payload];
+    case SET_MESSAGES:
+      return action.payload;
     default:
       return messages;
   }
