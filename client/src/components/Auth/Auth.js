@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -21,6 +21,14 @@ const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const profile = JSON.parse(localStorage.getItem("profile"));
+
+  useEffect(() => {
+    if (profile) {
+      history.push("/");
+    }
+  }, []);
 
   const switchMode = () => {
     setIsSignup(prevIsSignup => !prevIsSignup);

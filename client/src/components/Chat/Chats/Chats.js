@@ -14,7 +14,6 @@ const Chats = () => {
     <div>
       <h2 className={classes.heading}>Chats</h2>
       <div>
-        {/* <Divider /> */}
         {usersList.length === 0 ? (
           <div className={classes.noOnline}>
             <h2>No users currently online</h2>
@@ -22,20 +21,12 @@ const Chats = () => {
         ) : (
           usersList.map(user => (
             <div key={user.email}>
-              <div
-                // style={{
-                //   backgroundColor: currentUser === user.email ? "#FFFFFF" : "#F5F5F5",
-                //   color: currentUser === user.email ? "#000000" : null,
-                // }}
-                className={classes.chatDiv}
-                onClick={() => dispatch(setCurrentUser(user.email))}
-              >
+              <div className={classes.chatDiv} onClick={() => dispatch(setCurrentUser(user.email))}>
                 <Typography
                   variant="h6"
                   style={{
                     backgroundColor: currentUser === user.email ? "#FFFFFF" : null,
                     color: currentUser === user.email ? "#000000" : null,
-                    // border: "1px solid #000000",
                   }}
                   className={classes.chatItem}
                 >

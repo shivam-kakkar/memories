@@ -11,6 +11,7 @@ import {
   CardContent,
   Button,
   TextField,
+  Tooltip,
 } from "@material-ui/core/";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -21,10 +22,13 @@ import moment from "moment";
 import { setCurrentId, getPost } from "../../actions/currentSelected";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost, likePost, commentPost } from "../../actions/posts";
+import Picker from "emoji-picker-react";
+import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import useStyles from "./styles";
 
 const PostScreen = ({ history, match }) => {
   const [commentBody, setCommentBody] = useState("");
+  const [emojiDrawer, setEmojiDrawer] = useState(false);
   const dispatch = useDispatch();
   const classes = useStyles();
   const post = useSelector(state => state.currentSelected.currentPost);
@@ -80,6 +84,11 @@ const PostScreen = ({ history, match }) => {
   const handleLike = async () => {
     await dispatch(likePost(post._id));
     await dispatch(getPost(id));
+  };
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(emojiObject.emoji);
+    const updatedComment = commentBody + emojiObject.emoji;
+    setCommentBody(updatedComment);
   };
   const focus = () => {
     if (user?.result) {
@@ -168,7 +177,18 @@ const PostScreen = ({ history, match }) => {
                   </div>
                 </div>
               </div>
-              <div>
+              <div style={{ position: "relative" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "50px",
+                    zIndex: "2",
+                    left: "10px",
+                    display: emojiDrawer ? "block" : "none",
+                  }}
+                >
+                  <Picker disableSearchBar={true} onEmojiClick={onEmojiClick} />
+                </div>
                 <hr className={classes.horizontal} />
                 <CardActions className={classes.cardActions}>
                   <Button
@@ -190,12 +210,19 @@ const PostScreen = ({ history, match }) => {
                 </CardActions>
                 {user?.result ? (
                   <div className={classes.commentDiv}>
+                    <Tooltip title="Insert an emoji">
+                      <SentimentSatisfiedIcon
+                        size="large"
+                        style={{ margin: "0 5px", cursor: "pointer" }}
+                        onClick={() => setEmojiDrawer(!emojiDrawer)}
+                      />
+                    </Tooltip>
                     <TextField
                       id="comment"
                       variant="outlined"
                       size="small"
                       style={{ padding: "2px 0", width: "77%" }}
-                      placeholder="Add a comment"
+                      placeholder="Add a comment..."
                       value={commentBody}
                       onChange={e => setCommentBody(e.target.value)}
                       onKeyPress={event => (event.key === "Enter" ? handleComment() : null)}

@@ -45,6 +45,7 @@ export default makeStyles(theme => ({
   middleContainer: {
     maxHeight: "354px",
     overflowY: "auto",
+    position: "relative",
   },
   title: {
     padding: "5px 16px 0 16px",

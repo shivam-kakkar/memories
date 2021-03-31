@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Message from "./Message/Message";
 import { useSelector } from "react-redux";
 import ScrollToBottom from "react-scroll-to-bottom";
@@ -10,10 +10,6 @@ const Messages = () => {
   const messages = allMessages.filter(
     message => message.to === currentUser || message.from === currentUser
   );
-
-  // useEffect(() => {
-  //   console.log(allMessages);
-  // }, [allMessages]);
 
   return (
     <ScrollToBottom className="messageDiv">

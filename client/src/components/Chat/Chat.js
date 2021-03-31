@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grow, Grid } from "@material-ui/core";
 import Chats from "./Chats/Chats";
 import MessageContainer from "./MessageContainer/MessageContainer";
 
-const Chat = () => {
+const Chat = ({ history }) => {
+  const profile = JSON.parse(localStorage.getItem("profile"));
+
+  useEffect(() => {
+    if (!profile) {
+      history.push("/");
+    }
+  }, []);
   return (
     <Grow in>
-      <div style={{ backgroundColor: "#FFFFFF", overflow: "hidden" }}>
+      <div style={{ backgroundColor: "#FFFFFF" }}>
+        {/* <div style={{ backgroundColor: "#FFFFFF", overflow: "hidden" }}> */}
         <Grid
           container
           className="chatHeight"

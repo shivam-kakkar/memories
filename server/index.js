@@ -51,14 +51,6 @@ io.on("connection", socket => {
   io.sockets.emit("users", users);
 
   socket.on("sendMessage", message => {
-    // console.log(message);
-    const sockets = users.find(person => person.email === message.to).sockets;
-    sockets.map(socketId => {
-      io.to(socketId).emit("receiveMessage", message);
-      console.log("sent");
-    });
-  });
-  socket.on("sendMessage", message => {
     const from = message.from;
     const to = message.to;
 

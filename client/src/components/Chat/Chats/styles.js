@@ -6,7 +6,6 @@ export default makeStyles(theme => ({
     margin: 0,
     padding: "10px",
     fontWeight: "bold",
-    // backgroundColor: "#18B7FF",
     color: "#FFFFFF",
   },
   chatDiv: {
